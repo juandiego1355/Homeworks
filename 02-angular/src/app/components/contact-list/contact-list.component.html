@@ -1,0 +1,15 @@
+<div class="lista">
+  @if (contactos.length === 0) {
+    <p class="vacio">Todavia no hay contactos, agrega el primero.</p>
+  } @else {
+    @for (contacto of contactos; track contacto.id) {
+      <div class="tarjeta">
+        <div>
+          <strong>{{ contacto.nombre }}</strong>
+          <p>{{ contacto.telefono }}</p>
+        </div>
+        <button (click)="borrar(contacto.id)">Eliminar</button>
+      </div>
+    }
+  }
+</div>

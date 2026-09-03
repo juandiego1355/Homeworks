@@ -1,0 +1,17 @@
+<div class="formulario">
+  <input
+    type="text"
+    placeholder="Nombre"
+    [value]="nombre"
+    (change)="capturarNombre($event)"
+  />
+
+  <input
+    type="text"
+    placeholder="Telefono"
+    [value]="telefono"
+    (change)="capturarTelefono($event)"
+  />
+
+  <button (click)="agregar()">Agregar contacto</button>
+</div>

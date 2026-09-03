@@ -1,0 +1,11 @@
+.contenedor {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 0 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}

@@ -1,0 +1,38 @@
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vacio {
+  text-align: center;
+  color: #888;
+}
+
+.tarjeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.tarjeta p {
+  margin: 2px 0 0;
+  color: #666;
+  font-size: 13px;
+}
+
+.tarjeta button {
+  background-color: #e05c5c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tarjeta button:hover {
+  background-color: #c74747;
+}

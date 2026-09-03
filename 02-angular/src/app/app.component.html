@@ -1,0 +1,14 @@
+<main class="contenedor">
+  <h1>Mis Contactos</h1>
+
+  @if (cargando()) {
+    <app-loader></app-loader>
+  } @else {
+    <app-contact-form (nuevoContacto)="agregarContacto($event)"></app-contact-form>
+
+    <app-contact-list
+      [contactos]="contactos()"
+      (eliminarContacto)="eliminarContacto($event)">
+    </app-contact-list>
+  }
+</main>
