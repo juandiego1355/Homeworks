@@ -1,0 +1,34 @@
+<main class="contenedor">
+  <a routerLink="/" class="volver">← Volver al inicio</a>
+
+  <h1>🎵 Reproductor de canciones</h1>
+  <p class="subtitulo">
+    Implementado con una <strong>Lista Enlazada Simple</strong>. Cada canción es un
+    nodo que solo conoce a la siguiente canción de la lista.
+  </p>
+
+  @if (cancionActual) {
+    <section class="tarjeta-reproduccion">
+      <p class="etiqueta">Reproduciendo ({{ indiceActual() + 1 }} de {{ totalCanciones }})</p>
+      <h2>{{ cancionActual.titulo }}</h2>
+      <p class="artista">{{ cancionActual.artista }} · {{ cancionActual.duracion }}</p>
+
+      <div class="controles">
+        <button (click)="anterior()" [disabled]="indiceActual() === 0">⏮ Anterior</button>
+        <button (click)="siguiente()" [disabled]="indiceActual() === totalCanciones - 1">Siguiente ⏭</button>
+      </div>
+    </section>
+  }
+
+  <h3>Lista de reproducción</h3>
+  <ol class="lista-canciones">
+    @for (cancion of canciones(); track cancion.titulo; let i = $index) {
+      <li
+        [class.activa]="i === indiceActual()"
+        (click)="irACancion(i)">
+        <span class="titulo">{{ cancion.titulo }}</span>
+        <span class="detalle">{{ cancion.artista }} · {{ cancion.duracion }}</span>
+      </li>
+    }
+  </ol>
+</main>

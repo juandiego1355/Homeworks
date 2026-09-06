@@ -1,0 +1,31 @@
+<main class="contenedor">
+  <a routerLink="/" class="volver">← Volver al inicio</a>
+
+  <h1>🌐 Historial del navegador</h1>
+  <p class="subtitulo">
+    Implementado con una <strong>Lista Doblemente Enlazada</strong>. Cada página
+    conoce tanto a la página anterior como a la siguiente, por eso se puede
+    navegar en ambos sentidos.
+  </p>
+
+  @if (paginaActual) {
+    <section class="barra-navegador">
+      <div class="controles">
+        <button (click)="atras()" [disabled]="indiceActual() === 0">← Atrás</button>
+        <button (click)="adelante()" [disabled]="indiceActual() === totalPaginas - 1">Adelante →</button>
+      </div>
+      <div class="barra-direccion">{{ paginaActual }}</div>
+    </section>
+  }
+
+  <h3>Páginas visitadas ({{ indiceActual() + 1 }} de {{ totalPaginas }})</h3>
+  <ol class="lista-paginas">
+    @for (pagina of paginas(); track pagina; let i = $index) {
+      <li
+        [class.activa]="i === indiceActual()"
+        (click)="irAPagina(i)">
+        {{ pagina }}
+      </li>
+    }
+  </ol>
+</main>
