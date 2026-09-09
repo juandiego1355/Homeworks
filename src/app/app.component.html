@@ -1,0 +1,125 @@
+<div class="page">
+  <header class="top">
+    <div>
+      <p class="marca">Clínica San Rafael</p>
+      <h1>Turnos y guardia</h1>
+    </div>
+    <div class="guardia" *ngIf="clinica.medicoGuardia$ | async as medico">
+      <span>En guardia</span>
+      <strong>{{ medico.nombre }}</strong>
+      <small>{{ medico.especialidad }} · {{ clinica.segundosRotacion$ | async }}s</small>
+    </div>
+  </header>
+
+  <p class="aviso" *ngIf="mensaje">{{ mensaje }}</p>
+
+  <div class="layout">
+    <section class="card">
+      <h2>Nuevo paciente</h2>
+      <label>
+        Nombre
+        <input [(ngModel)]="nombre" name="nombre" />
+      </label>
+      <label>
+        Documento
+        <input [(ngModel)]="documento" name="documento" />
+      </label>
+      <label>
+        Motivo
+        <input [(ngModel)]="motivo" name="motivo" />
+      </label>
+      <button type="button" (click)="registrar()">Agregar a espera</button>
+    </section>
+
+    <section class="card">
+      <h2>Atender</h2>
+      <p class="ayuda">Sale de la cola y entra al historial.</p>
+      <label>
+        Notas
+        <input [(ngModel)]="notas" name="notas" placeholder="Opcional" />
+      </label>
+      <button type="button" class="principal" (click)="atender()">Atender siguiente</button>
+    </section>
+
+    <section class="card">
+      <h2>Médico</h2>
+      <label>
+        Nombre
+        <input [(ngModel)]="medNombre" name="medNombre" />
+      </label>
+      <label>
+        Especialidad
+        <input [(ngModel)]="medEspecialidad" name="medEspecialidad" />
+      </label>
+      <button type="button" (click)="agregarMedico()">Agregar a rotación</button>
+    </section>
+
+    <section class="card">
+      <h2>Comité</h2>
+      <label>
+        Nombre
+        <input [(ngModel)]="miNombre" name="miNombre" />
+      </label>
+      <label>
+        Cargo
+        <input [(ngModel)]="miCargo" name="miCargo" />
+      </label>
+      <button type="button" (click)="agregarMiembro()">Agregar miembro</button>
+    </section>
+  </div>
+
+  <div class="layout listas">
+    <section class="card">
+      <h2>En espera <em>{{ ((clinica.espera$ | async) || []).length }}</em></h2>
+      <p class="vacio" *ngIf="((clinica.espera$ | async) || []).length === 0">Nadie en cola.</p>
+      <ul>
+        <li *ngFor="let p of clinica.espera$ | async; let i = index" [class.primero]="i === 0">
+          <b>{{ p.nombre }}</b>
+          <span>{{ p.motivo }}</span>
+          <small>{{ p.documento }} · {{ p.llegada | date:'HH:mm' }}</small>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Historial</h2>
+      <p class="vacio" *ngIf="((clinica.historial$ | async) || []).length === 0">Todavía no hay atenciones.</p>
+      <ul>
+        <li *ngFor="let a of clinica.historial$ | async">
+          <b>{{ a.paciente.nombre }}</b>
+          <span>{{ a.medico.nombre }}</span>
+          <small>{{ a.fecha | date:'dd/MM HH:mm' }} · {{ a.notas }}</small>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Rotación de guardia</h2>
+      <ul>
+        <li *ngFor="let m of clinica.medicos$ | async; let i = index"
+            [class.activo]="i === 0">
+          <b>{{ m.nombre }}</b>
+          <span>{{ m.especialidad }}</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Comité administrativo</h2>
+      <p class="turno" *ngIf="clinica.miembroActual$ | async as miembro">
+        Turno: {{ miembro.nombre }} ({{ miembro.cargo }})
+      </p>
+      <ul>
+        <li *ngFor="let m of clinica.comite$ | async; let i = index"
+            [class.activo]="i === 0">
+          <b>{{ m.nombre }}</b>
+          <span>{{ m.cargo }}</span>
+        </li>
+      </ul>
+      <div class="acciones">
+        <button type="button" (click)="clinica.comiteRetroceder()">Anterior</button>
+        <button type="button" (click)="clinica.comiteAvanzar()">Siguiente</button>
+      </div>
+    </section>
+  </div>
+</div>
