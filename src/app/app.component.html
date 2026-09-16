@@ -1,13 +1,13 @@
 <div class="page">
   <header class="top">
     <div>
-      <p class="marca">Clínica San Rafael</p>
+      <p class="marca">Clï¿½nica San Rafael</p>
       <h1>Turnos y guardia</h1>
     </div>
     <div class="guardia" *ngIf="clinica.medicoGuardia$ | async as medico">
       <span>En guardia</span>
       <strong>{{ medico.nombre }}</strong>
-      <small>{{ medico.especialidad }} · {{ clinica.segundosRotacion$ | async }}s</small>
+      <small>{{ medico.especialidad }} ï¿½ {{ clinica.segundosRotacion$ | async }}s</small>
     </div>
   </header>
 
@@ -42,7 +42,7 @@
     </section>
 
     <section class="card">
-      <h2>Médico</h2>
+      <h2>Mï¿½dico</h2>
       <label>
         Nombre
         <input [(ngModel)]="medNombre" name="medNombre" />
@@ -51,11 +51,11 @@
         Especialidad
         <input [(ngModel)]="medEspecialidad" name="medEspecialidad" />
       </label>
-      <button type="button" (click)="agregarMedico()">Agregar a rotación</button>
+      <button type="button" (click)="agregarMedico()">Agregar a rotaciï¿½n</button>
     </section>
 
     <section class="card">
-      <h2>Comité</h2>
+      <h2>Comitï¿½</h2>
       <label>
         Nombre
         <input [(ngModel)]="miNombre" name="miNombre" />
@@ -76,25 +76,25 @@
         <li *ngFor="let p of clinica.espera$ | async; let i = index" [class.primero]="i === 0">
           <b>{{ p.nombre }}</b>
           <span>{{ p.motivo }}</span>
-          <small>{{ p.documento }} · {{ p.llegada | date:'HH:mm' }}</small>
+          <small>{{ p.documento }} ï¿½ {{ p.llegada | date:'HH:mm' }}</small>
         </li>
       </ul>
     </section>
 
     <section class="card">
       <h2>Historial</h2>
-      <p class="vacio" *ngIf="((clinica.historial$ | async) || []).length === 0">Todavía no hay atenciones.</p>
+      <p class="vacio" *ngIf="((clinica.historial$ | async) || []).length === 0">Todavï¿½a no hay atenciones.</p>
       <ul>
         <li *ngFor="let a of clinica.historial$ | async">
           <b>{{ a.paciente.nombre }}</b>
           <span>{{ a.medico.nombre }}</span>
-          <small>{{ a.fecha | date:'dd/MM HH:mm' }} · {{ a.notas }}</small>
+          <small>{{ a.fecha | date:'dd/MM HH:mm' }} ï¿½ {{ a.notas }}</small>
         </li>
       </ul>
     </section>
 
     <section class="card">
-      <h2>Rotación de guardia</h2>
+      <h2>Rotaciï¿½n de guardia</h2>
       <ul>
         <li *ngFor="let m of clinica.medicos$ | async; let i = index"
             [class.activo]="i === 0">
@@ -105,7 +105,7 @@
     </section>
 
     <section class="card">
-      <h2>Comité administrativo</h2>
+      <h2>Comitï¿½ administrativo</h2>
       <p class="turno" *ngIf="clinica.miembroActual$ | async as miembro">
         Turno: {{ miembro.nombre }} ({{ miembro.cargo }})
       </p>
