@@ -1,0 +1,59 @@
+<main class="contenedor">
+  <h1>Challenge 05 — Cola en ATM</h1>
+  <p class="subtitulo">
+    Estructura <strong>Queue (FIFO)</strong>: la primera persona en llegar es la
+    primera en atenderse.
+  </p>
+
+  <section class="panel">
+    <h2>Agregar persona</h2>
+    <form [formGroup]="formulario" (ngSubmit)="agregarPersona()">
+      <label>
+        Name
+        <input type="text" formControlName="name" placeholder="Nombre completo" />
+      </label>
+
+      <label>
+        Withdrawal
+        <input type="number" formControlName="withdrawal" placeholder="Monto a retirar" />
+      </label>
+
+      <label>
+        Arrival date
+        <input type="datetime-local" formControlName="arrivalDate" />
+      </label>
+
+      <button type="submit">Enqueue — agregar a la cola</button>
+    </form>
+  </section>
+
+  <section class="panel cola">
+    <div class="encabezado-cola">
+      <h2>Fila de personas ({{ total() }})</h2>
+      <button type="button" (click)="atenderPersona()" [disabled]="total() === 0">
+        Dequeue — atender siguiente
+      </button>
+    </div>
+
+    @if (siguiente(); as siguientePersona) {
+      <p class="siguiente">Siguiente: <strong>{{ siguientePersona.name }}</strong></p>
+    } @else {
+      <p class="vacia">La cola está vacía.</p>
+    }
+
+    <ol class="lista-cola">
+      @for (persona of personas(); track $index; let i = $index) {
+        <li [class.frente-item]="i === 0">
+          @if (i === 0) {
+            <span class="etiqueta">FRONT</span>
+          }
+          <div>
+            <strong>{{ persona.name }}</strong>
+            <p>Withdrawal: ${{ persona.withdrawal }}</p>
+            <p>Arrival date: {{ persona.arrivalDate | date: 'medium' }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+</main>
