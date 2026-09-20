@@ -1,0 +1,61 @@
+<main class="contenedor">
+  <h1>Challenge 04 — Pila de libros</h1>
+  <p class="subtitulo">
+    Estructura <strong>Stack (LIFO)</strong>: el último libro que entra queda
+    en la cima y es el primero en salir.
+  </p>
+
+  <section class="panel">
+    <h2>Agregar libro</h2>
+    <form [formGroup]="formulario" (ngSubmit)="agregarLibro()">
+      <label>
+        Name
+        <input type="text" formControlName="name" placeholder="Título del libro" />
+      </label>
+      <label>
+        ISBN
+        <input type="text" formControlName="isbn" placeholder="978-..." />
+      </label>
+      <label>
+        Author
+        <input type="text" formControlName="author" placeholder="Autor" />
+      </label>
+      <label>
+        Editorial
+        <input type="text" formControlName="editorial" placeholder="Editorial" />
+      </label>
+      <button type="submit">Push — agregar a la pila</button>
+    </form>
+  </section>
+
+  <section class="panel pila">
+    <div class="encabezado-pila">
+      <h2>Pila ({{ total() }} libros)</h2>
+      <button type="button" (click)="sacarLibro()" [disabled]="total() === 0">
+        Pop — sacar cima
+      </button>
+    </div>
+
+    @if (cima(); as libroCima) {
+      <p class="cima">Cima: <strong>{{ libroCima.name }}</strong></p>
+    } @else {
+      <p class="vacia">La pila está vacía.</p>
+    }
+
+    <ol class="lista-pila">
+      @for (libro of libros(); track $index; let i = $index) {
+        <li [class.cima-item]="i === 0">
+          @if (i === 0) {
+            <span class="etiqueta">TOP</span>
+          }
+          <div>
+            <strong>{{ libro.name }}</strong>
+            <p>ISBN: {{ libro.isbn }}</p>
+            <p>Author: {{ libro.author }}</p>
+            <p>Editorial: {{ libro.editorial }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+</main>
