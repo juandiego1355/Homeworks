@@ -1,0 +1,45 @@
+﻿<main class="page-shell">
+  <h1 class="title">CHALLENGE 07</h1>
+
+  <div class="workspace">
+    <aside class="sidebar" aria-label="Menu">
+      <ng-template #menuList let-items>
+        <ul class="menu-list">
+          <li *ngFor="let item of items" class="menu-item">
+            <button
+              type="button"
+              class="menu-button"
+              [class.active]="selectedId === item.id"
+              (click)="selectNode(item)"
+            >
+              <span>{{ item.title }}</span>
+            </button>
+
+            <div *ngIf="item.children?.length" class="submenu">
+              <ng-container *ngTemplateOutlet="menuList; context: { $implicit: item.children }"></ng-container>
+            </div>
+          </li>
+        </ul>
+      </ng-template>
+
+      <ng-container *ngTemplateOutlet="menuList; context: { $implicit: menuTree }"></ng-container>
+    </aside>
+
+    <section class="content-panel" aria-live="polite">
+      <p class="label">Selected item</p>
+      <h2>{{ selectedNode.title }}</h2>
+      <p class="description">{{ selectedNode.description }}</p>
+
+      <dl class="details">
+        <div>
+          <dt>Link</dt>
+          <dd>{{ selectedNode.link }}</dd>
+        </div>
+        <div>
+          <dt>Component</dt>
+          <dd>{{ selectedNode.component }}</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</main>
