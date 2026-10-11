@@ -1,0 +1,123 @@
+.contenedor {
+  max-width: 980px;
+  margin: 40px auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 8px;
+  color: #1f6feb;
+}
+
+.subtitulo {
+  color: #4b5563;
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+}
+
+.panel {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+
+.panel h2 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #0f172a;
+}
+
+form {
+  display: grid;
+  gap: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+  color: #334155;
+}
+
+input {
+  padding: 10px 12px;
+  border: 1px solid #d9e2ec;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.acciones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+.boton-secundario {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.resultado {
+  margin-top: 14px;
+  font-weight: 600;
+  color: #0f766e;
+}
+
+.recorridos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.recorrido {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.recorrido h3 {
+  margin-top: 0;
+  color: #0f172a;
+}
+
+.recorrido p {
+  margin: 0;
+  color: #334155;
+  word-break: break-word;
+}
+
+.tree-svg {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fbff, #edf6ff);
+  border: 1px solid #dbeafe;
+}
+
+.nota {
+  margin-top: 14px;
+  color: #475569;
+}
+
+.nota a {
+  color: #2563eb;
+}

@@ -1,0 +1,52 @@
+<main class="contenedor">
+  <h1>Challenge 06 — Árbol binario</h1>
+  <p class="subtitulo">
+    Estructura <strong>Binary Search Tree</strong>: cada nodo tiene a la izquierda
+    valores menores y a la derecha valores mayores.
+  </p>
+
+  <section class="panel">
+    <h2>Insertar valor</h2>
+    <form [formGroup]="formulario" (ngSubmit)="insertarValor()">
+      <label>
+        Valor
+        <input type="number" formControlName="value" placeholder="Ej. 20" />
+      </label>
+      <div class="acciones">
+        <button type="submit">Insertar</button>
+        <button type="button" class="boton-secundario" (click)="buscarValor()">
+          Buscar valor
+        </button>
+      </div>
+    </form>
+
+    <p class="resultado">{{ resultadoBusqueda() }}</p>
+  </section>
+
+  <section class="panel">
+    <h2>Recorridos del árbol</h2>
+    <div class="recorridos">
+      <div class="recorrido">
+        <h3>Inorder</h3>
+        <p>{{ inorder().join(' → ') || 'Vacío' }}</p>
+      </div>
+      <div class="recorrido">
+        <h3>Preorder</h3>
+        <p>{{ preorder().join(' → ') || 'Vacío' }}</p>
+      </div>
+      <div class="recorrido">
+        <h3>Postorder</h3>
+        <p>{{ postorder().join(' → ') || 'Vacío' }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel"> 
+    <h2>Visualización con D3</h2>
+    <svg #treeSvg class="tree-svg" role="img" aria-label="Estructura del árbol binario"></svg>
+    <p class="nota">
+      Puedes verificar la estructura visual en
+      <a href="https://visualgo.net/en/bst" target="_blank" rel="noreferrer">Visualgo</a>.
+    </p>
+  </section>
+</main>
