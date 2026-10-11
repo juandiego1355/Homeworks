@@ -1,0 +1,243 @@
+:host {
+  display: block;
+}
+
+.page-heading {
+  margin-bottom: 26px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #35aebe;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+  color: #192a38;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.07em;
+}
+
+.page-heading > p:last-child {
+  margin: 10px 0 0;
+  color: #72808b;
+}
+
+.demo-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px solid #e2e8ec;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(36, 57, 72, 0.055);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 21px 13px 13px;
+  color: #c7d2d9;
+  background: #20252a;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 7px 23px;
+  padding-bottom: 19px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f6f8f9;
+}
+
+.sidebar-logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: #193039;
+  background: #74d0d3;
+  font-weight: 800;
+}
+
+.sidebar-brand div {
+  display: grid;
+  gap: 3px;
+}
+
+.sidebar-brand strong {
+  font-size: 0.88rem;
+}
+
+.sidebar-brand small {
+  color: #7f8d95;
+  font-size: 0.57rem;
+  letter-spacing: 0.1em;
+}
+
+.menu-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 11px;
+  border: 0;
+  border-radius: 6px;
+  color: #bac4cb;
+  background: transparent;
+  text-align: left;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-button.active {
+  color: #fff;
+  background: #315979;
+  box-shadow: inset 3px 0 #78d4dc;
+}
+
+.chevron {
+  color: #8e9aa1;
+  font-size: 1rem;
+}
+
+.submenu {
+  margin: 3px 0 4px 10px;
+  padding-left: 7px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.submenu .menu-button {
+  padding: 8px 10px;
+  font-size: 0.78rem;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 8px 5px;
+  color: #84929a;
+  font-size: 0.7rem;
+}
+
+.preview {
+  min-width: 0;
+  background: linear-gradient(145deg, #fff 0%, #f8fbfc 100%);
+}
+
+.preview-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 19px 25px;
+  border-bottom: 1px solid #eaf0f2;
+  color: #7f8c95;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #638078;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2db47a;
+}
+
+.preview-body {
+  max-width: 600px;
+  padding: clamp(24px, 5vw, 58px);
+}
+
+.preview-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 31px;
+  border: 1px solid #dcebed;
+  border-radius: 14px;
+  color: #258c9c;
+  background: #effafb;
+  font-size: 1.25rem;
+}
+
+.preview-body h2 {
+  margin: 0;
+  color: #1f303d;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  letter-spacing: -0.06em;
+}
+
+.description {
+  max-width: 440px;
+  margin: 12px 0 30px;
+  color: #75838d;
+  line-height: 1.6;
+}
+
+.info-row {
+  display: grid;
+  gap: 7px;
+  padding: 15px 0;
+  border-top: 1px solid #e8edef;
+}
+
+.info-row > span {
+  color: #87939b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.info-row code {
+  color: #345665;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 760px) {
+  .demo-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    min-height: 330px;
+  }
+
+  .preview-body {
+    padding: 28px;
+  }
+}

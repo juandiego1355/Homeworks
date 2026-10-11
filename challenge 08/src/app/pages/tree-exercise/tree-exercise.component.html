@@ -1,0 +1,40 @@
+<section class="page-heading">
+  <p class="eyebrow">Ejercicio privado 01</p>
+  <h1>Árbol N-ario de menús</h1>
+  <p>Cada nodo contiene un título, un enlace, un componente y, opcionalmente, submenús.</p>
+</section>
+
+<section class="tree-card">
+  <div class="card-heading">
+    <div>
+      <h2>Estructura del árbol</h2>
+      <p>Datos del menú jerárquico del Challenge 07</p>
+    </div>
+    <span class="count">{{ nodeCount }} nodos</span>
+  </div>
+
+  <ng-template #treeItems let-items let-level="level">
+    <ul class="tree-list" [class.root-list]="level === 0">
+      <li *ngFor="let item of items" class="tree-item">
+        <article class="node-card" [style.--depth]="level">
+          <span class="node-marker" aria-hidden="true">{{ level === 0 ? 'N' : '↳' }}</span>
+          <div class="node-content">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <div class="node-meta">
+              <span>{{ item.link }}</span>
+              <code>{{ item.component }}</code>
+            </div>
+          </div>
+        </article>
+        <ng-container *ngIf="item.children?.length">
+          <ng-container
+            *ngTemplateOutlet="treeItems; context: { $implicit: item.children, level: level + 1 }"
+          />
+        </ng-container>
+      </li>
+    </ul>
+  </ng-template>
+
+  <ng-container *ngTemplateOutlet="treeItems; context: { $implicit: menuTree, level: 0 }" />
+</section>

@@ -1,0 +1,25 @@
+<div class="private-shell">
+  <header class="topbar">
+    <a class="brand" routerLink="/private/tree" aria-label="Inicio de Challenge 08">
+      <span class="brand-icon">08</span>
+      <span>Challenge <strong>08</strong></span>
+    </a>
+    <div class="account">
+      <span class="user-dot" aria-hidden="true"></span>
+      <span class="username">{{ auth.currentUser() }}</span>
+      <button type="button" class="logout-button" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main class="private-content">
+    <nav class="tabs" aria-label="Ejercicios privados">
+      <a routerLink="/private/tree" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <span>01</span> Árbol N-ario
+      </a>
+      <a routerLink="/private/sidebar" routerLinkActive="active">
+        <span>02</span> Menú lateral
+      </a>
+    </nav>
+    <router-outlet />
+  </main>
+</div>

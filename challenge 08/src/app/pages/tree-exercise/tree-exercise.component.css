@@ -1,0 +1,169 @@
+:host {
+  display: block;
+}
+
+.page-heading {
+  margin-bottom: 26px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #35aebe;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+  color: #192a38;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.07em;
+}
+
+.page-heading > p:last-child {
+  margin: 10px 0 0;
+  color: #72808b;
+}
+
+.tree-card {
+  padding: clamp(18px, 3vw, 30px);
+  border: 1px solid #e2e8ec;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(36, 57, 72, 0.055);
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #edf0f2;
+}
+
+.card-heading h2 {
+  margin: 0;
+  color: #283b49;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.1rem;
+}
+
+.card-heading p {
+  margin: 5px 0 0;
+  color: #89949c;
+  font-size: 0.82rem;
+}
+
+.count {
+  padding: 7px 10px;
+  border-radius: 20px;
+  color: #18899a;
+  background: #e9f8fa;
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tree-list {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  margin: 10px 0 0 30px;
+  padding: 0 0 0 22px;
+  border-left: 1px solid #d9e5e9;
+  list-style: none;
+}
+
+.tree-list.root-list {
+  margin: 20px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.tree-item {
+  position: relative;
+}
+
+.tree-list:not(.root-list) > .tree-item::before {
+  position: absolute;
+  top: 22px;
+  left: -23px;
+  width: 22px;
+  border-top: 1px solid #d9e5e9;
+  content: '';
+}
+
+.node-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 13px 15px;
+  border: 1px solid #e8edf0;
+  border-radius: 11px;
+  background: #fcfdfd;
+}
+
+.node-marker {
+  display: grid;
+  flex: 0 0 29px;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 9px;
+  color: #177f8e;
+  background: #e3f6f7;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.node-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.node-content h3 {
+  margin: 2px 0 4px;
+  color: #253745;
+  font-size: 0.95rem;
+}
+
+.node-content > p {
+  margin: 0;
+  color: #78858e;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.node-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+  margin-top: 9px;
+  color: #348d9a;
+  font-size: 0.75rem;
+}
+
+.node-meta code {
+  color: #8b6a36;
+  font-family: 'DM Sans', sans-serif;
+}
+
+@media (max-width: 560px) {
+  .tree-list:not(.root-list) {
+    margin-left: 15px;
+    padding-left: 14px;
+  }
+
+  .tree-list:not(.root-list) > .tree-item::before {
+    left: -15px;
+    width: 14px;
+  }
+
+  .node-card {
+    padding: 11px;
+  }
+}

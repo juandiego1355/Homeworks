@@ -1,0 +1,60 @@
+<section class="page-heading">
+  <p class="eyebrow">Ejercicio privado 02</p>
+  <h1>Navegación con menú lateral</h1>
+  <p>Selecciona una opción para ver el título, el enlace y el componente de su página.</p>
+</section>
+
+<section class="demo-layout">
+  <aside class="sidebar" aria-label="Menú de demostración">
+    <div class="sidebar-brand">
+      <span class="sidebar-logo">W</span>
+      <div><strong>Espacio de trabajo</strong><small>ÁREA PRIVADA</small></div>
+    </div>
+
+    <ng-template #menuItems let-items>
+      <ul class="menu-list">
+        <li *ngFor="let item of items">
+          <button
+            type="button"
+            class="menu-button"
+            [class.active]="selectedNode().id === item.id"
+            (click)="selectNode(item)"
+          >
+            <span>{{ item.title }}</span>
+            <span *ngIf="item.children?.length" class="chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div *ngIf="item.children?.length" class="submenu">
+            <ng-container
+              *ngTemplateOutlet="menuItems; context: { $implicit: item.children }"
+            />
+          </div>
+        </li>
+      </ul>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="menuItems; context: { $implicit: menuTree }" />
+    <div class="sidebar-footer">Sesión iniciada · user&#64;mail.com</div>
+  </aside>
+
+  <article class="preview">
+    <div class="preview-topline">
+      <span>VISTA DEL COMPONENTE</span>
+      <span class="status"><i></i> Ruta privada</span>
+    </div>
+    <div class="preview-body">
+      <div class="preview-icon" aria-hidden="true">↗</div>
+      <p class="eyebrow">Página seleccionada</p>
+      <h2>{{ selectedNode().title }}</h2>
+      <p class="description">{{ selectedNode().description }}</p>
+
+      <div class="info-row">
+        <span>Enlace de ruta</span>
+        <code>{{ selectedNode().link }}</code>
+      </div>
+      <div class="info-row">
+        <span>Componente Angular</span>
+        <code>{{ selectedNode().component }}</code>
+      </div>
+    </div>
+  </article>
+</section>
