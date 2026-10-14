@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explorador de Archivos - Parcial 2</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>📁 Explorador n-ario</h1>
+      <div id="session" class="session"></div>
+    </header>
+
+    <main class="layout">
+      <section id="auth-panel" class="card" hidden>
+        <h2>Iniciar sesión</h2>
+        <form id="auth-form">
+          <input id="email" type="email" placeholder="Correo" required />
+          <input id="password" type="password" placeholder="Contraseña (mín. 6)" minlength="6" required />
+          <div class="row">
+            <button type="submit" id="btn-login" class="btn primary">Entrar</button>
+            <button type="button" id="btn-register" class="btn">Registrarme</button>
+          </div>
+        </form>
+        <p id="auth-msg" class="msg"></p>
+      </section>
+
+      <section id="editor-panel" class="card" hidden>
+        <h2>Crear en: <span id="target-label">/</span></h2>
+        <form id="create-form" class="row">
+          <input id="node-name" type="text" placeholder="Nombre" required maxlength="60" />
+          <select id="node-type">
+            <option value="folder">📁 Carpeta</option>
+            <option value="file">📄 Archivo</option>
+          </select>
+          <button type="submit" class="btn primary">Crear</button>
+        </form>
+        <p id="create-msg" class="msg"></p>
+      </section>
+
+      <section class="card tree-card">
+        <h2>Árbol de carpetas y archivos</h2>
+        <div id="tree"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

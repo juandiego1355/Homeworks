@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /nodes/{nodeId} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+        && request.resource.data.createdBy == request.auth.token.email
+        && request.resource.data.type in ['file', 'folder']
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0;
+
+      allow delete: if request.auth != null;
+      allow update: if false;
+    }
+  }
+}
