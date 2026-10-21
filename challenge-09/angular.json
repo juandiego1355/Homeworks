@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "challenge07": {
+    "challenge09": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/challenge07",
+            "outputPath": "dist/challenge09",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "challenge07:build:production"
+              "buildTarget": "challenge09:build:production"
             },
             "development": {
-              "buildTarget": "challenge07:build:development"
+              "buildTarget": "challenge09:build:development"
             }
           },
           "defaultConfiguration": "development"
