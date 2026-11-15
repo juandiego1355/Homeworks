@@ -1,0 +1,166 @@
+@if (!configured) {
+  <main class="setup-screen">
+    <div class="setup-card">
+      <a class="brand" href="#" aria-label="Taskflow inicio">
+        <span class="brand-mark">✓</span>
+        <span>taskflow</span>
+      </a>
+      <span class="eyebrow">CASI LISTO</span>
+      <h1>Conecta tu proyecto de Supabase</h1>
+      <p>La app ya está preparada. Añade las credenciales de tu proyecto para habilitar las cuentas y la sincronización.</p>
+      <ol class="setup-steps">
+        <li><span>1</span> Ejecuta el SQL de <code>supabase/schema.sql</code> en el SQL Editor de Supabase.</li>
+        <li><span>2</span> Copia la URL del proyecto y su clave publicable (anon) desde API Settings.</li>
+        <li><span>3</span> Reemplaza los valores pendientes en <code>src/environments/environment.ts</code>.</li>
+      </ol>
+      <div class="setup-note">
+        <span aria-hidden="true">ⓘ</span>
+        <span>Usa únicamente la clave publicable en el frontend. Nunca incluyas la clave <strong>service_role</strong>.</span>
+      </div>
+    </div>
+    <span class="setup-footer">Hecho para enfocarte en lo que importa.</span>
+  </main>
+} @else if (!user()) {
+  <main class="auth-layout">
+    <section class="auth-story">
+      <a class="brand brand-light" href="#" aria-label="Taskflow inicio">
+        <span class="brand-mark">✓</span>
+        <span>taskflow</span>
+      </a>
+      <div class="story-copy">
+        <span class="eyebrow">UN DÍA A LA VEZ</span>
+        <h1>Menos ruido.<br /><span>Más hecho.</span></h1>
+        <p>Un espacio tranquilo para organizar tus pendientes y hacer lugar a lo que sí importa.</p>
+        <div class="story-points">
+          <div><span class="point-icon">↗</span><span>Todo claro, en un solo lugar</span></div>
+          <div><span class="point-icon">◷</span><span>Sincronizado en tiempo real</span></div>
+          <div><span class="point-icon">✳</span><span>Tu ritmo, tus prioridades</span></div>
+        </div>
+      </div>
+      <div class="story-bottom"><span>Diseñado para días más ligeros.</span><span>01 — 03</span></div>
+    </section>
+
+    <section class="auth-panel">
+      <div class="auth-box">
+        <div class="mobile-brand brand"><span class="brand-mark">✓</span><span>taskflow</span></div>
+        <span class="eyebrow">{{ authMode() === 'login' ? 'QUÉ BUENO VERTE' : 'EMPECEMOS' }}</span>
+        <h2>{{ authMode() === 'login' ? 'Bienvenido de vuelta' : 'Crea tu espacio' }}</h2>
+        <p class="auth-intro">{{ authMode() === 'login' ? 'Inicia sesión y sigue donde lo dejaste.' : 'Una cuenta y tus ideas ya tienen dónde vivir.' }}</p>
+
+        @if (error()) { <div class="alert alert-error" role="alert">{{ error() }}</div> }
+        @if (notice()) { <div class="alert alert-success" role="status">{{ notice() }}</div> }
+
+        <form (ngSubmit)="authenticate()">
+          @if (authMode() === 'register') {
+            <label for="full-name">Tu nombre</label>
+            <input id="full-name" name="fullName" type="text" [(ngModel)]="fullName" placeholder="¿Cómo te llamas?" autocomplete="name" required />
+          }
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" [(ngModel)]="authEmail" placeholder="nombre@ejemplo.com" autocomplete="email" required />
+          <label for="password">Contraseña</label>
+          <input id="password" name="password" type="password" [(ngModel)]="authPassword" placeholder="Al menos 6 caracteres" [attr.autocomplete]="authMode() === 'login' ? 'current-password' : 'new-password'" minlength="6" required />
+          <button class="button button-primary auth-submit" type="submit" [disabled]="saving()">
+            {{ saving() ? 'Un momento…' : authMode() === 'login' ? 'Iniciar sesión' : 'Crear cuenta' }}
+            @if (!saving()) { <span aria-hidden="true">→</span> }
+          </button>
+        </form>
+
+        <div class="auth-switch">
+          {{ authMode() === 'login' ? '¿Todavía no tienes cuenta?' : '¿Ya tienes una cuenta?' }}
+          <button class="text-button" type="button" (click)="authMode.set(authMode() === 'login' ? 'register' : 'login'); error.set(''); notice.set('')">
+            {{ authMode() === 'login' ? 'Regístrate' : 'Inicia sesión' }}
+          </button>
+        </div>
+        <p class="privacy-note"><span>⌑</span> Tus tareas son privadas y solo tú puedes verlas.</p>
+      </div>
+      <span class="auth-copyright">© 2026 Taskflow. Un poco más de calma, todos los días.</span>
+    </section>
+  </main>
+} @else {
+  <main class="workspace">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Taskflow inicio"><span class="brand-mark">✓</span><span>taskflow</span></a>
+      <div class="sidebar-label">TU ESPACIO</div>
+      <button class="nav-item" type="button" [class.active]="filter() === 'all'" (click)="filter.set('all')"><span class="nav-icon">▤</span>Mis tareas<span class="nav-count">{{ tasks().length }}</span></button>
+      <button class="nav-item" type="button" [class.active]="filter() === 'open'" (click)="filter.set('open')"><span class="nav-icon">◷</span>Pendientes<span class="nav-count">{{ openCount() }}</span></button>
+      <button class="nav-item" type="button" [class.active]="filter() === 'done'" (click)="filter.set('done')"><span class="nav-icon">✓</span>Completadas<span class="nav-count">{{ completedCount() }}</span></button>
+      <div class="sidebar-tip">
+        <span class="tip-spark">✳</span>
+        <strong>Un paso a la vez</strong>
+        <p>No tienes que hacerlo todo hoy. Solo empieza con lo siguiente.</p>
+      </div>
+      <div class="profile">
+        <label class="avatar-upload" title="Cambiar foto de perfil">
+          @if (avatarUrl()) { <img [src]="avatarUrl()" alt="Foto de perfil" /> }
+          @else { <span>{{ displayName().charAt(0).toUpperCase() }}</span> }
+          <input type="file" accept="image/*" (change)="uploadAvatar($event)" aria-label="Cambiar foto de perfil" />
+        </label>
+        <div class="profile-info"><strong>{{ displayName() }}</strong><span>{{ user()?.email }}</span></div>
+        <button class="icon-button signout-button" type="button" (click)="signOut()" aria-label="Cerrar sesión" title="Cerrar sesión">↗</button>
+      </div>
+    </aside>
+
+    <section class="main-panel">
+      <header class="topbar"><span class="breadcrumb">Mi espacio <span>/</span> {{ filter() === 'all' ? 'Mis tareas' : filter() === 'open' ? 'Pendientes' : 'Completadas' }}</span><span class="live-indicator"><i></i> Sincronizado</span></header>
+      <div class="content">
+        <div class="welcome-row">
+          <div><span class="eyebrow">{{ today | date:'EEEE, d MMMM':'':'es' }}</span><h1>{{ filter() === 'all' ? 'Tus tareas' : filter() === 'open' ? 'Pendientes' : 'Completadas' }}<span class="heading-period">.</span></h1><p class="page-subtitle">Un poco de progreso también es progreso.</p></div>
+          <button class="button button-primary add-button" type="button" (click)="openNewTask()"><span>+</span> Nueva tarea</button>
+        </div>
+
+        @if (error()) { <div class="alert alert-error workspace-alert" role="alert">{{ error() }} <button type="button" (click)="error.set('')" aria-label="Cerrar">×</button></div> }
+        @if (notice()) { <div class="alert alert-success workspace-alert" role="status">{{ notice() }} <button type="button" (click)="notice.set('')" aria-label="Cerrar">×</button></div> }
+
+        <div class="summary-row">
+          <div class="summary-card"><span class="summary-icon warm">◷</span><div><strong>{{ openCount() }}</strong><span>por hacer</span></div></div>
+          <div class="summary-card"><span class="summary-icon cool">✓</span><div><strong>{{ completedCount() }}</strong><span>completadas</span></div></div>
+          <div class="summary-card"><span class="summary-icon lilac">✳</span><div><strong>{{ tasks().length }}</strong><span>en total</span></div></div>
+        </div>
+
+        <div class="list-heading"><div><h2>Tu lista</h2><span>{{ filteredTasks().length }} {{ filteredTasks().length === 1 ? 'tarea' : 'tareas' }}</span></div><div class="filter-tabs" role="group" aria-label="Filtrar tareas">
+          <button type="button" [class.selected]="filter() === 'all'" (click)="filter.set('all')">Todas</button>
+          <button type="button" [class.selected]="filter() === 'open'" (click)="filter.set('open')">Pendientes</button>
+          <button type="button" [class.selected]="filter() === 'done'" (click)="filter.set('done')">Hechas</button>
+        </div></div>
+
+        @if (loading()) {
+          <div class="loading-state"><span class="spinner"></span><span>Cargando tus tareas…</span></div>
+        } @else if (filteredTasks().length === 0) {
+          <div class="empty-state"><div class="empty-art"><span>✓</span><i></i><b></b></div><h3>{{ filter() === 'done' ? 'Aún no has terminado ninguna' : filter() === 'open' ? '¡Todo al día!' : 'Este espacio es todo tuyo' }}</h3><p>{{ filter() === 'done' ? 'Las tareas que completes aparecerán aquí.' : filter() === 'open' ? 'Disfruta el momento o añade una nueva tarea.' : 'Anota eso que no quieres olvidar.' }}</p>
+            @if (filter() !== 'done') { <button class="button button-secondary" type="button" (click)="openNewTask()">+ Añadir una tarea</button> }
+          </div>
+        } @else {
+          <div class="task-list">
+            @for (task of filteredTasks(); track trackTask($index, task)) {
+              <article class="task-card" [class.task-complete]="task.completed">
+                <button class="task-check" type="button" [class.checked]="task.completed" [attr.aria-label]="task.completed ? 'Marcar como pendiente' : 'Marcar como completada'" (click)="toggleTask(task)">@if (task.completed) { ✓ }</button>
+                <div class="task-body"><h3>{{ task.title }}</h3>@if (task.description) { <p>{{ task.description }}</p> }<span class="task-date"><i></i> {{ task.completed ? 'Completada' : 'Añadida' }} · {{ formatDate(task.updated_at || task.created_at) }}</span></div>
+                <div class="task-actions"><button class="icon-button" type="button" (click)="openEditTask(task)" [attr.aria-label]="'Editar ' + task.title" title="Editar">✎</button><button class="icon-button delete-action" type="button" (click)="deleteTask(task)" [attr.aria-label]="'Eliminar ' + task.title" title="Eliminar">⌫</button></div>
+              </article>
+            }
+          </div>
+        }
+        <footer class="content-footer">Las tareas se guardan automáticamente <span>·</span> Sincronización en tiempo real</footer>
+      </div>
+    </section>
+  </main>
+}
+
+@if (dialogOpen()) {
+  <div class="modal-backdrop" (click)="closeDialog()">
+    <section class="task-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" (click)="$event.stopPropagation()">
+      <button class="icon-button dialog-close" type="button" (click)="closeDialog()" aria-label="Cerrar">×</button>
+      <span class="eyebrow">{{ editingTask() ? 'AJUSTA LOS DETALLES' : 'UN NUEVO COMIENZO' }}</span>
+      <h2 id="dialog-title">{{ editingTask() ? 'Editar tarea' : 'Nueva tarea' }}</h2>
+      <p class="dialog-copy">{{ editingTask() ? 'Los cambios se sincronizan al instante.' : 'No hace falta tenerlo todo resuelto. Empieza por el título.' }}</p>
+      @if (error()) { <div class="alert alert-error" role="alert">{{ error() }}</div> }
+      <form (ngSubmit)="saveTask()">
+        <label for="task-title">¿Qué tienes en mente?</label>
+        <input id="task-title" name="taskTitle" type="text" [(ngModel)]="taskTitle" maxlength="160" placeholder="Ej. Preparar la presentación" required autofocus />
+        <label for="task-description">Un poco más de contexto <span class="optional">(opcional)</span></label>
+        <textarea id="task-description" name="taskDescription" [(ngModel)]="taskDescription" maxlength="1000" rows="4" placeholder="Añade notas o detalles…"></textarea>
+        <div class="dialog-actions"><button class="button button-quiet" type="button" (click)="closeDialog()">Cancelar</button><button class="button button-primary" type="submit" [disabled]="saving() || !taskTitle.trim()">{{ saving() ? 'Guardando…' : editingTask() ? 'Guardar cambios' : 'Crear tarea' }}</button></div>
+      </form>
+    </section>
+  </div>
+}
