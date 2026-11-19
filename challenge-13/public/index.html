@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10111d">
+    <meta name="description" content="Encuentra el GIF perfecto para cada momento con GIF Finder.">
+    <title>GIF Finder — encuentra tu reacción</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="GIF Finder, inicio">
+          <span class="brand-mark" aria-hidden="true">g</span>
+          <span>gif<span class="brand-accent">finder</span></span>
+        </a>
+        <span class="demo-badge"><span aria-hidden="true"></span> MODO DEMO</span>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="page-title">
+          <div class="eyebrow"><span aria-hidden="true">✳</span> TU PRÓXIMA REACCIÓN EMPIEZA AQUÍ</div>
+          <h1 id="page-title">Encuentra el GIF<br>que <span>lo dice todo.</span></h1>
+          <p class="intro">Hay un GIF para cada momento. Busca, encuentra y comparte el indicado.</p>
+
+          <form class="search-form" id="search-form" role="search">
+            <label class="sr-only" for="search-input">¿Qué GIF estás buscando?</label>
+            <span class="search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="10.8" cy="10.8" r="6.8"></circle>
+                <path d="m16 16 4.2 4.2"></path>
+              </svg>
+            </span>
+            <input id="search-input" name="q" type="search" placeholder="Prueba con “gato feliz”..." autocomplete="off" maxlength="80" required>
+            <button type="submit">Buscar <span aria-hidden="true">↗</span></button>
+          </form>
+
+          <div class="suggestions" aria-label="Búsquedas sugeridas">
+            <span>Prueba:</span>
+            <button type="button" class="suggestion" data-query="gato feliz">🐱 gato feliz</button>
+            <button type="button" class="suggestion" data-query="celebración">🎉 celebración</button>
+            <button type="button" class="suggestion" data-query="lunes">☕ lunes</button>
+          </div>
+        </section>
+
+        <section class="results-section" aria-labelledby="results-title">
+          <div class="results-heading">
+            <div>
+              <p class="section-kicker">TU COLECCIÓN</p>
+              <h2 id="results-title">GIFs para cada mood<span class="heading-dot">.</span></h2>
+            </div>
+            <span class="result-count" id="result-count" aria-live="polite"></span>
+          </div>
+
+          <div class="status-panel" id="status-panel" aria-live="polite" aria-atomic="true">
+            <div class="status-icon" aria-hidden="true">✦</div>
+            <h3 id="status-title">¿Qué tienes en mente?</h3>
+            <p id="status-message">Escribe una palabra o elige una sugerencia para encontrar tu próximo GIF.</p>
+          </div>
+
+          <div class="gif-grid" id="gif-grid" aria-label="Resultados de GIFs" hidden></div>
+        </section>
+      </main>
+
+      <footer>
+        <span class="footer-brand">gif<span>finder</span></span>
+        <span>Hecho para expresar lo que las palabras no alcanzan.</span>
+        <span class="footer-demo">DEMO · SIN CONEXIÓN A GIPHY</span>
+      </footer>
+    </div>
+  </body>
+</html>
