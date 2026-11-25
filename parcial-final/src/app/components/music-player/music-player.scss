@@ -1,0 +1,79 @@
+@use '../../styles/tokens' as *;
+
+.player {
+  position: fixed;
+  z-index: 20;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  height: 88px;
+  grid-template-columns: minmax(210px, 1fr) minmax(280px, 1.4fr) minmax(180px, 1fr);
+  align-items: center;
+  padding: 0 25px;
+  border-top: 1px solid #262927;
+  background: #101211;
+}
+
+.now-playing { display: flex; min-width: 0; align-items: center; gap: 12px; }
+.now-playing > img { width: 52px; height: 52px; border-radius: 5px; object-fit: cover; }
+.track-meta { display: grid; min-width: 0; gap: 5px; }
+.track-meta strong, .track-meta span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.track-meta strong { color: #f2f4f2; font-size: 11px; }
+.track-meta span { color: #9da39f; font-size: 10px; }
+
+.save-track {
+  border: 0;
+  background: none;
+  color: #9da39f;
+  cursor: pointer;
+  font-size: 19px;
+  &:hover { color: $green; }
+  &.saved { color: $green; }
+}
+
+.playback { position: relative; display: grid; justify-items: center; gap: 8px; }
+.player-controls { display: flex; align-items: center; gap: 23px; }
+.player-controls button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #aab0ac;
+  cursor: pointer;
+  font-size: 12px;
+  transition: color .18s, transform .18s;
+  &:hover { color: #fff; transform: scale(1.08); }
+}
+.player-controls .play-button {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  padding-left: 2px;
+  border-radius: 50%;
+  background: #f4f5f4;
+  color: #141615;
+  &:hover { background: $green; color: #07100b; }
+}
+
+.progress-row { display: flex; width: min(390px, 100%); align-items: center; gap: 9px; color: #878e89; font-size: 9px; }
+.progress-row input { flex: 1; accent-color: $green; }
+.audio-notice {
+  position: absolute;
+  top: 35px;
+  margin: 0;
+  color: #a9b5ac;
+  font-size: 9px;
+}
+
+.player-extras { display: flex; justify-content: flex-end; align-items: center; gap: 11px; color: #adb3af; font-size: 12px; }
+.player-extras input { width: 85px; accent-color: $green; }
+
+@media (max-width: 650px) {
+  .player { height: 78px; grid-template-columns: minmax(110px, 1fr) 1fr; padding: 0 12px; }
+  .now-playing > img { width: 43px; height: 43px; }
+  .save-track, .player-extras { display: none; }
+  .player-controls { gap: 14px; }
+  .progress-row { width: 100%; }
+  .audio-notice { display: none; }
+}

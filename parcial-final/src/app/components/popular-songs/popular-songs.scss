@@ -1,0 +1,58 @@
+@use '../../styles/tokens' as *;
+
+:host { display: block; }
+.popular-section { padding-top: 37px; }
+.section-title { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 12px; }
+.eyebrow { color: $green; font-size: 9px; font-weight: 800; letter-spacing: 1.65px; }
+.section-title h2 { margin: 7px 0 0; color: #f1f3f1; font-size: clamp(20px, 2.3vw, 25px); letter-spacing: -.7px; }
+.section-caption { color: #818a83; font-size: 9px; }
+.ranking-table { margin-top: 12px; }
+.ranking-head, .ranking-row {
+  display: grid;
+  grid-template-columns: 42px minmax(200px, 1.6fr) minmax(100px, 1fr) minmax(110px, .7fr) 24px;
+  align-items: center;
+  gap: 11px;
+}
+.ranking-head { padding: 0 12px 9px; border-bottom: 1px solid #252a26; color: #858e87; font-size: 8px; font-weight: 750; letter-spacing: .8px; }
+.ranking-row {
+  width: 100%;
+  min-height: 57px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #dce1dd;
+  cursor: pointer;
+  text-align: left;
+  transition: background .17s;
+  &:hover, &.current { background: #1b211c; }
+  &:hover .row-arrow, &.current .row-arrow { color: $green; opacity: 1; }
+}
+.rank-number { color: #8c958e; font-size: 10px; font-variant-numeric: tabular-nums; }
+.ranking-track { display: flex; min-width: 0; align-items: center; gap: 11px; }
+.ranking-track img { width: 38px; height: 38px; border-radius: 4px; object-fit: cover; }
+.ranking-track > span { display: grid; min-width: 0; gap: 4px; }
+.ranking-track strong, .ranking-track small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ranking-track strong { color: #e7ebe8; font-size: 11px; font-weight: 600; }
+.ranking-track small { color: #929a94; font-size: 9px; }
+.ranking-genre, .ranking-plays { color: #a8b0aa; font-size: 10px; }
+.ranking-plays { font-variant-numeric: tabular-nums; }
+.row-arrow { color: $green; font-size: 15px; opacity: 0; }
+
+@media (max-width: 1050px) {
+  .ranking-head, .ranking-row { grid-template-columns: 30px minmax(170px, 1.5fr) minmax(75px, .8fr) minmax(95px, .8fr) 20px; }
+}
+@media (max-width: 800px) {
+  .ranking-head, .ranking-row { grid-template-columns: 27px minmax(160px, 1fr) minmax(90px, .55fr) 20px; }
+  .ranking-head span:nth-child(4), .ranking-row .ranking-plays { display: none; }
+}
+@media (max-width: 580px) {
+  .section-title { align-items: flex-start; }
+  .section-caption { max-width: 105px; padding-top: 5px; text-align: right; }
+  .ranking-head, .ranking-row { grid-template-columns: 20px minmax(120px, 1fr) 20px; gap: 7px; }
+  .ranking-head span:nth-child(3), .ranking-row .ranking-genre { display: none; }
+  .ranking-track { gap: 7px; }
+  .ranking-track img { width: 33px; height: 33px; }
+  .ranking-track strong { font-size: 10px; }
+  .ranking-track small { font-size: 8px; }
+}

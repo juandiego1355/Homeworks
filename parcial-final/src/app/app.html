@@ -1,0 +1,71 @@
+<div class="app-shell">
+  <app-sidebar [activeSection]="activeSection()" (sectionSelected)="navigateTo($event)" />
+
+  <main class="main-content" id="home">
+    <header class="topbar" id="search">
+      <div class="history-controls" aria-label="Navegación">
+        <button aria-label="Atrás" title="Inicio" (click)="navigateTo('home')">‹</button>
+        <button aria-label="Ir a estructuras de datos" title="Estructuras de datos" (click)="navigateTo('structures')">›</button>
+      </div>
+      <app-search-bar (songSelected)="selectSong($event)" (queryChanged)="onSearch($event)" />
+      <div class="profile-area"><span class="premium-pill">EDICIÓN ACADÉMICA</span><span class="avatar" aria-label="Perfil de estudiante">E</span></div>
+    </header>
+
+    @if (searchQuery().trim()) {
+      <section class="search-page">
+        <span class="eyebrow">RESULTADOS EN TIEMPO REAL · TRIE</span>
+        <h1>Resultados para <span>“{{ searchQuery() }}”</span></h1>
+        @if (searchResults().length) {
+          <div class="song-grid search-grid">
+            @for (song of searchResults(); track song.id) {
+              <app-song-card [song]="song" (selected)="selectSong($event)" />
+            }
+          </div>
+        } @else {
+          <div class="no-results"><span>⌕</span><strong>No encontramos coincidencias.</strong><p>Prueba otro prefijo para recorrer el Trie.</p></div>
+        }
+      </section>
+    } @else {
+      <section class="welcome-section">
+        <div class="welcome-copy">
+          <span class="eyebrow">TU BANDA SONORA PARA HOY</span>
+          <h1>Buenas tardes,<br><span>estudiante.</span></h1>
+          <p>Un espacio para escuchar, descubrir y aprender cómo se conectan los datos.</p>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="art-disc"><span>♫</span></div>
+          <span class="art-note note-one">♪</span><span class="art-note note-two">♫</span>
+          <span class="art-caption">SPOTIFY EDU<br><small>PLAY · LEARN · REPEAT</small></span>
+        </div>
+      </section>
+
+      <section class="content-section" id="library">
+        <div class="section-title"><div><span class="eyebrow">HECHO PARA TI</span><h2>Tu selección de hoy</h2></div><button class="text-action" (click)="navigateTo('structures')">Explorar el laboratorio <span>↗</span></button></div>
+        <div class="song-grid">
+          @for (song of songs().slice(0, 5); track song.id) {
+            <app-song-card [song]="song" (selected)="selectSong($event)" />
+          }
+        </div>
+      </section>
+
+      <app-popular-songs [songs]="topSongs()" [selectedSongId]="selectedSong().id" (songSelected)="selectSong($event)" />
+
+      <section class="content-section related-section">
+        <div class="section-title"><div><span class="eyebrow">BFS DESDE {{ selectedSong().name.toLocaleUpperCase() }}</span><h2>Si te gusta esta canción</h2></div><span class="section-caption">Conectadas en el grafo</span></div>
+        <div class="song-grid">
+          @for (song of recommendations(); track song.id) {
+            <app-song-card [song]="song" (selected)="selectSong($event)" />
+          } @empty {
+            <p class="empty-related">Selecciona una canción para descubrir sus conexiones.</p>
+          }
+        </div>
+      </section>
+    }
+
+    <app-academic-panel [selectedSong]="selectedSong()" (songSelected)="selectSong($event)" />
+    <footer class="page-footer"><span>Spotify Edu</span><span>Construido con estructuras de datos · Parcial EDD II</span></footer>
+  </main>
+</div>
+
+<app-music-player [song]="selectedSong()" (previous)="changeSong(-1)" (next)="changeSong(1)" />

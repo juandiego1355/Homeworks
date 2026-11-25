@@ -1,0 +1,25 @@
+import { Song } from '../models/song.model';
+
+export const SONGS: Song[] = [
+  { id: 'aurora', name: 'Aurora', artist: 'Luna Norte', plays: 984200, cover: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=640&q=85', genre: 'Indie pop' },
+  { id: 'blue-hour', name: 'Blue Hour', artist: 'Milo Parks', plays: 876500, cover: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=640&q=85', genre: 'Dream pop' },
+  { id: 'city-lights', name: 'City Lights', artist: 'The Satellites', plays: 792300, cover: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=640&q=85', genre: 'Indie rock' },
+  { id: 'dancing-alone', name: 'Dancing Alone', artist: 'Mara Sol', plays: 741800, cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=640&q=85', genre: 'Electronic' },
+  { id: 'echoes', name: 'Echoes in June', artist: 'Northbound', plays: 698100, cover: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=640&q=85', genre: 'Alternative' },
+  { id: 'evergreen', name: 'Evergreen', artist: 'Luna Norte', plays: 652700, cover: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=640&q=85', genre: 'Indie pop' },
+  { id: 'golden', name: 'Golden', artist: 'Milo Parks', plays: 603400, cover: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=640&q=85', genre: 'Dream pop' },
+  { id: 'gravity', name: 'Gravity', artist: 'Mara Sol', plays: 574900, cover: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=640&q=85', genre: 'Electronic' },
+  { id: 'halfway-home', name: 'Halfway Home', artist: 'The Satellites', plays: 531200, cover: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=640&q=85', genre: 'Indie rock' },
+  { id: 'honey-moon', name: 'Honey Moon', artist: 'Sofia Vale', plays: 489600, cover: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=640&q=85', genre: 'Soul' },
+  { id: 'into-the-blue', name: 'Into the Blue', artist: 'Northbound', plays: 457100, cover: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=640&q=85', genre: 'Alternative' },
+  { id: 'june-bloom', name: 'June Bloom', artist: 'Sofia Vale', plays: 421800, cover: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=640&q=85', genre: 'Soul' },
+  { id: 'little-wonders', name: 'Little Wonders', artist: 'Luna Norte', plays: 398200, cover: 'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=640&q=85', genre: 'Indie pop' },
+  { id: 'midnight-drive', name: 'Midnight Drive', artist: 'Mara Sol', plays: 367500, cover: 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=640&q=85', genre: 'Electronic' },
+  { id: 'moonflower', name: 'Moonflower', artist: 'Milo Parks', plays: 339100, cover: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=640&q=85', genre: 'Dream pop' },
+  { id: 'paper-skies', name: 'Paper Skies', artist: 'Northbound', plays: 312800, cover: 'https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=640&q=85', genre: 'Alternative' },
+  { id: 'quiet-storm', name: 'Quiet Storm', artist: 'Sofia Vale', plays: 287400, cover: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=640&q=85', genre: 'Soul' },
+  { id: 'slow-motion', name: 'Slow Motion', artist: 'The Satellites', plays: 259300, cover: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=640&q=85', genre: 'Indie rock' },
+  { id: 'soft-focus', name: 'Soft Focus', artist: 'Luna Norte', plays: 224600, cover: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=640&q=85', genre: 'Indie pop' },
+  { id: 'stay-awake', name: 'Stay Awake', artist: 'Mara Sol', plays: 198700, cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=640&q=85', genre: 'Electronic' },
+  { id: 'wildflower', name: 'Wildflower', artist: 'Sofia Vale', plays: 176200, cover: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=640&q=85', genre: 'Soul' },
+];
